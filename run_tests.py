@@ -17,7 +17,7 @@ def get_token():
     return response.text.strip('"')
 
 def run_tests():
-    subprocess.run("behave -f json -o reports/cucumber.json", shell=True)
+    subprocess.run("behave -f cucumber_json -o reports/cucumber.json", shell=True)
 
 def upload_results(token):
     url = "https://xray.cloud.getxray.app/api/v2/import/execution/cucumber"
