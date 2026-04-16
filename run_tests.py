@@ -17,24 +17,24 @@ def get_token():
     return response.text.strip('"')
 
 def run_tests():
-    subprocess.run("behave -f cucumber_json -o reports/cucumber.json", shell=True)
+    subprocess.run("behave -f json -o reports/cucumber.json", shell=True)
 
 def upload_results(token):
     url = "https://xray.cloud.getxray.app/api/v2/import/execution/cucumber"
 
     headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json"
+        "Authorization": f"Bearer {token}"
     }
 
     params = {
-        "testPlanKey": "SAU-24"   # 👈 replace with your actual Test Plan key
+        "testPlanKey": "SAU-24"
     }
 
-    with open("reports/cucumber.json") as f:
-        data = json.load(f)
+    files = {
+        "file": ("cucumber.json", open("reports/cucumber.json", "rb"), "application/json")
+    }
 
-    response = requests.post(url, headers=headers, params=params, json=data)
+    response = requests.post(url, headers=headers, params=params, files=files)
 
     print("Status Code:", response.status_code)
     print("Upload response:", response.text)
