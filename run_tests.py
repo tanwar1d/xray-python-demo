@@ -28,7 +28,7 @@ def upload_results(token):
     }
 
     params = {
-        "testPlanKey": "PROJ-200"   # 👈 replace with your actual Test Plan key
+        "testPlanKey": "SAU-24"   # 👈 replace with your actual Test Plan key
     }
 
     with open("reports/cucumber.json") as f:
