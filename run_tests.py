@@ -22,14 +22,19 @@ def upload_results(token):
     url = "https://xray.cloud.getxray.app/api/v2/import/execution/cucumber"
 
     headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json"
+        "Authorization": f"Bearer {token}"
     }
 
-    with open("reports/cucumber.json") as f:
-        data = f.read()
+    params = {
+        "testPlanKey": "PROJ-200"   # 👈 YOUR TEST PLAN KEY
+    }
 
-    response = requests.post(url, headers=headers, data=data)
+    files = {
+        "file": open("reports/cucumber.json", "rb")
+    }
+
+    response = requests.post(url, headers=headers, params=params, files=files)
+
     print("Upload response:", response.text)
 
 if __name__ == "__main__":
