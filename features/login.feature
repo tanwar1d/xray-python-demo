@@ -1,3 +1,4 @@
+Feature: Login functionality
 @SAU-22
 Scenario: Successful login
   Given user is on login page
